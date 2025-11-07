@@ -83,7 +83,7 @@ bluetoothctl show
 ## Install python dependencies 
 
 ```bash
-python3 -m venv ./venv
+python3 -m venv --system-site-packages ./venv
 source ./venv/bin/activate
 pip install bluezero
 ```
@@ -93,6 +93,7 @@ pip install bluezero
 ```bash
  sudo ./venv/bin/python3 ble_server.py
 ```
+
 
 
 
