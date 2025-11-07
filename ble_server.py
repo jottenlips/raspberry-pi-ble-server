@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
 from bluezero import peripheral
 
-# Callback when client writes
-def write_callback(value):
-    print("Raw bytes received:", list(value))
-    try:
-        print("Received from phone:", value.decode())
-    except Exception:
-        print("Received raw bytes:", value)
-
 
 # Pi BLE adapter and local name
 ADAPTER_ADDR = 'B8:27:EB:16:8F:44'
@@ -21,6 +13,15 @@ ble_peripheral = peripheral.Peripheral(adapter_address=ADAPTER_ADDR,
 # Service UUID and ID
 SERVICE_UUID = '12345678-1234-5678-1234-56789abcdef1'
 SERVICE_ID = 0  # internal service index
+
+# Callback when client writes
+def write_callback(value):
+    print("Raw bytes received:", list(value))
+    try:
+        print("Received from phone:", value.decode())
+        ble_peripheral.notify(SERVICE_ID, CHAR_UUID, value)
+    except Exception:
+        print("Received raw bytes:", value)
 
 # Add service
 ble_peripheral.add_service(
@@ -38,8 +39,7 @@ ble_peripheral.add_characteristic(
     chr_id=0,                # first characteristic
     uuid=CHAR_UUID,
     value=bytearray(),       # initial value
-    notifying=False,
-    flags=['write', 'write-without-response'],         # BLE write flags
+    flags=['write', 'write-without-response', 'notify'],         # BLE write flags
     write_callback=write_callback
 )
 
