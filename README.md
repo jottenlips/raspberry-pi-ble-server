@@ -20,7 +20,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 ## Install Dependencies 
 
 ```bash
-sudo xargs apt install -y < ~/manual-packages.txt
+sudo xargs apt install -y < ./manual-packages.txt
 ```
 
 ## Make Bluetooth Discoverable
@@ -81,8 +81,8 @@ bluetoothctl show
 ## Install python dependencies 
 
 ```bash
-python3 -m venv ~/venv
-source ~/venv/bin/activate
+python3 -m venv ./venv
+source ./venv/bin/activate
 pip install bluezero
 ```
 
@@ -91,3 +91,4 @@ pip install bluezero
 ```bash
  sudo ./venv/bin/python3 ble_server.py
 ```
+
