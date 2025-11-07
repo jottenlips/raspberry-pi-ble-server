@@ -21,6 +21,8 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 
 ```bash
 sudo xargs apt install -y < ./manual-packages.txt
+# we mostly need dbus and cairo
+sudo apt install -y python3-cairo python3-dbus libdbus-1-dev libcairo2-dev
 ```
 
 ## Make Bluetooth Discoverable
@@ -91,5 +93,6 @@ pip install bluezero
 ```bash
  sudo ./venv/bin/python3 ble_server.py
 ```
+
 
 
