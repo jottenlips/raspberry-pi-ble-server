@@ -40,11 +40,15 @@ CHAR_UUID = '12345678-1234-5678-1234-56789abcdef0'
 
 # Add writable characteristic
 ble_peripheral.add_characteristic(
-    srv_id=SERVICE_ID,
-    char_uuid=CHAR_UUID,
-    flags=['write', 'write-without-response', 'notify'],
+    srv_id=SERVICE_ID,       # use same service ID
+    chr_id=0,                # first characteristic
+    uuid=CHAR_UUID,
+    value=bytearray(),       # initial value
+    notifying=True,
+    flags=['write', 'write-without-response', 'notify'],         # BLE write flags
     write_callback=write_callback
 )
+
 
 # Start advertising
 print(f"Advertising as {LOCAL_NAME}. Waiting for BLE writes...")
