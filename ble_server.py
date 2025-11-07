@@ -3,6 +3,7 @@ from bluezero import peripheral
 
 # Callback when client writes
 def write_callback(value):
+    print("Raw bytes received:", list(value))
     try:
         print("Received from phone:", value.decode())
     except Exception:
