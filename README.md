@@ -46,7 +46,7 @@ show
 ```
 
 ```bash
-nano /etc/bluetooth/main.conf
+sudo nano /etc/bluetooth/main.conf
 ```
 
 add these settings under general
@@ -91,4 +91,5 @@ pip install bluezero
 ```bash
  sudo ./venv/bin/python3 ble_server.py
 ```
+
 
