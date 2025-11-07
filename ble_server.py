@@ -14,12 +14,17 @@ ble_peripheral = peripheral.Peripheral(adapter_address=ADAPTER_ADDR,
 SERVICE_UUID = '12345678-1234-5678-1234-56789abcdef1'
 SERVICE_ID = 0  # internal service index
 
+def send_response(message: str):
+    # Encode string as bytes
+    value = bytes(message, 'utf-8')
+    # Send notification to all subscribed clients
+    ble_peripheral.notify(SERVICE_ID, CHAR_UUID, value)
+
 # Callback when client writes
 def write_callback(value):
     print("Raw bytes received:", list(value))
     try:
-        print("Received from phone:", value.decode())
-        ble_peripheral.notify(SERVICE_ID, CHAR_UUID, value)
+        send_response("Echo: " + value.decode())
     except Exception:
         print("Received raw bytes:", value)
 
@@ -35,11 +40,9 @@ CHAR_UUID = '12345678-1234-5678-1234-56789abcdef0'
 
 # Add writable characteristic
 ble_peripheral.add_characteristic(
-    srv_id=SERVICE_ID,       # use same service ID
-    chr_id=0,                # first characteristic
-    uuid=CHAR_UUID,
-    value=bytearray(),       # initial value
-    flags=['write', 'write-without-response', 'notify'],         # BLE write flags
+    srv_id=SERVICE_ID,
+    char_uuid=CHAR_UUID,
+    flags=['write', 'write-without-response', 'notify'],
     write_callback=write_callback
 )
 
