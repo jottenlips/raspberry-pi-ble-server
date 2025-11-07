@@ -11,7 +11,7 @@ def write_callback(value):
 
 # Pi BLE adapter and local name
 ADAPTER_ADDR = 'B8:27:EB:16:8F:44'
-LOCAL_NAME = 'PiBLE'
+LOCAL_NAME = 'raspberry'
 
 # Create peripheral
 ble_peripheral = peripheral.Peripheral(adapter_address=ADAPTER_ADDR,
